@@ -10,10 +10,9 @@ class Categoriesfirst extends StatefulWidget {
 class _CategoriesState extends State<Categoriesfirst> {
   List<String> categories = [
     "Tất cả",
-    "Quần áo",
-    "Túi sách",
-    "Hộp quà",
-    "Tranh",
+    "Quạt",
+    "Nhẫn",
+    "Đèn",
     "Lọ thủy tinh",
     "Phụ kiện"
   ];

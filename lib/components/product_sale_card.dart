@@ -45,7 +45,7 @@ class _ProductSaleCardState extends State<ProductSaleCard> {
           onTap: () => Navigator.pushNamed(
             context,
             DetailsScreen.routeName,
-            arguments: ProductDetailsArguments(product: product),
+            arguments: ProductDetailsArguments(product: product, page: 1),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,9 +178,8 @@ class _ProductSaleCardState extends State<ProductSaleCard> {
                               ),
                             ),
                           );
-                        } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
                         }
+                        return new CircularProgressIndicator();
                       }),
                 ],
               ),

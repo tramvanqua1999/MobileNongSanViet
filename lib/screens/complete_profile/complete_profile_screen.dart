@@ -6,11 +6,19 @@ class CompleteProfileScreen extends StatelessWidget {
   static String routeName = "/complete_profile";
   @override
   Widget build(BuildContext context) {
+    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),
       ),
-      body: Body(),
+      body: Body(
+        phone: args.phone,
+      ),
     );
   }
+}
+
+class ScreenArguments {
+  final String phone;
+  ScreenArguments(this.phone);
 }

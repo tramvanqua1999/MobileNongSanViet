@@ -51,7 +51,6 @@ class _ListProductState extends State<ListProduct> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Product> demoProducts = snapshot.data;
-
                 // print(demoProducts);
                 return GridView.builder(
                   shrinkWrap: true,
@@ -66,7 +65,7 @@ class _ListProductState extends State<ListProduct> {
                             context,
                             DetailsScreen.routeName,
                             arguments: ProductDetailsArguments(
-                                product: demoProducts[index]),
+                                product: demoProducts[index], page: 1),
                           ),
                           child: Container(
                               padding: EdgeInsets.all(0),
@@ -113,7 +112,15 @@ class _ListProductState extends State<ListProduct> {
                                                   ),
                                                 ),
                                               ),
-                                              demoProducts[index].discount != 0
+                                              demoProducts[index].discount !=
+                                                          0 &&
+                                                      demoProducts[index]
+                                                              .lastday
+                                                              .difference(
+                                                                  DateTime
+                                                                      .now())
+                                                              .inDays >
+                                                          1
                                                   ? Positioned(
                                                       top: 0,
                                                       right: 0,
@@ -294,6 +301,7 @@ class _ListProductState extends State<ListProduct> {
                                                     ),
                                                   );
                                                 }
+                                                return new CircularProgressIndicator();
                                               },
                                             ),
                                           ),

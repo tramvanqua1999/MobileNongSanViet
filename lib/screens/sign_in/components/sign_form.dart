@@ -54,7 +54,7 @@ class _SignFormState extends State<SignForm> {
         "username": userController.text,
         "password": passController.text,
       });
-      print(response.body);
+      // print(response.body);
       if (response.body != "999") {
         ProcessDialog.closeLoadingDialog();
         if (response.body == "0") {

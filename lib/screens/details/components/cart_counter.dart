@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/size_config.dart';
 
 class CartCounter extends StatefulWidget {
+  const CartCounter({
+    Key key,
+    @required this.amount,
+  }) : super(key: key);
+
+  final int amount;
   @override
-  _CartCounterState createState() => _CartCounterState();
+  _CartCounterState createState() => _CartCounterState(amount);
 }
 
 class _CartCounterState extends State<CartCounter> {
+  _CartCounterState(this.amount);
+  int amount;
   int numOfItems = 1;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class _CartCounterState extends State<CartCounter> {
             icon: Icons.add,
             press: () {
               setState(() {
-                numOfItems++;
+                numOfItems == amount ? numOfItems : numOfItems++;
               });
             }),
       ],

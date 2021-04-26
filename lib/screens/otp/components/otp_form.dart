@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/default_button.dart';
+import 'package:shop_app/screens/complete_profile/complete_profile_screen.dart';
 import 'package:shop_app/size_config.dart';
 
 import '../../../constants.dart';
@@ -7,16 +8,41 @@ import '../../../constants.dart';
 class OtpForm extends StatefulWidget {
   const OtpForm({
     Key key,
+    @required this.checkcode,
+    @required this.phone,
   }) : super(key: key);
+  final String checkcode;
+  final String phone;
 
   @override
-  _OtpFormState createState() => _OtpFormState();
+  _OtpFormState createState() => _OtpFormState(checkcode, phone);
 }
 
 class _OtpFormState extends State<OtpForm> {
+  _OtpFormState(this.checkcode, this.phone);
+  String checkcode;
+  String phone;
+  String code = "";
+
   FocusNode pin2FocusNode;
   FocusNode pin3FocusNode;
   FocusNode pin4FocusNode;
+
+  TextEditingController number1 = TextEditingController();
+  TextEditingController number2 = TextEditingController();
+  TextEditingController number3 = TextEditingController();
+  TextEditingController number4 = TextEditingController();
+
+  void check_success() {
+    if (code == checkcode) {
+      Navigator.pushNamed(
+        context,
+        CompleteProfileScreen.routeName,
+        arguments: ScreenArguments(phone),
+      );
+      // print("successs" + code);
+    } else {}
+  }
 
   @override
   void initState() {
@@ -52,8 +78,9 @@ class _OtpFormState extends State<OtpForm> {
               SizedBox(
                 width: getProportionateScreenWidth(60),
                 child: TextFormField(
+                  controller: number1,
                   autofocus: true,
-                  obscureText: true,
+                  obscureText: false,
                   style: TextStyle(fontSize: 24),
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
@@ -61,37 +88,47 @@ class _OtpFormState extends State<OtpForm> {
                   onChanged: (value) {
                     nextField(value, pin2FocusNode);
                   },
+                  onSaved: (value) {},
                 ),
               ),
               SizedBox(
                 width: getProportionateScreenWidth(60),
                 child: TextFormField(
+                  controller: number2,
                   focusNode: pin2FocusNode,
-                  obscureText: true,
+                  obscureText: false,
                   style: TextStyle(fontSize: 24),
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
                   decoration: otpInputDecoration,
-                  onChanged: (value) => nextField(value, pin3FocusNode),
+                  onChanged: (value) {
+                    nextField(value, pin3FocusNode);
+                  },
+                  onSaved: (value) {},
                 ),
               ),
               SizedBox(
                 width: getProportionateScreenWidth(60),
                 child: TextFormField(
+                  controller: number3,
                   focusNode: pin3FocusNode,
-                  obscureText: true,
+                  obscureText: false,
                   style: TextStyle(fontSize: 24),
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
                   decoration: otpInputDecoration,
-                  onChanged: (value) => nextField(value, pin4FocusNode),
+                  onChanged: (value) {
+                    nextField(value, pin4FocusNode);
+                  },
+                  onSaved: (value) {},
                 ),
               ),
               SizedBox(
                 width: getProportionateScreenWidth(60),
                 child: TextFormField(
+                  controller: number4,
                   focusNode: pin4FocusNode,
-                  obscureText: true,
+                  obscureText: false,
                   style: TextStyle(fontSize: 24),
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
@@ -99,9 +136,11 @@ class _OtpFormState extends State<OtpForm> {
                   onChanged: (value) {
                     if (value.length == 1) {
                       pin4FocusNode.unfocus();
+
                       // Then you need to check is the code is correct or not
                     }
                   },
+                  onSaved: (value) {},
                 ),
               ),
             ],
@@ -110,7 +149,10 @@ class _OtpFormState extends State<OtpForm> {
           DefaultButton(
             height: 56,
             text: "Continue",
-            press: () {},
+            press: () {
+              code = number1.text + number2.text + number3.text + number4.text;
+              check_success();
+            },
           )
         ],
       ),

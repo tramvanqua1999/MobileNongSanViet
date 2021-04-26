@@ -13,14 +13,15 @@ class DetailsScreen extends StatelessWidget {
         ModalRoute.of(context).settings.arguments;
     return Scaffold(
       backgroundColor: Color(0xFFF5F6F9),
-      appBar: CustomAppBar(rating: agrs.product.rating),
-      body: Body(product: agrs.product),
+      appBar: CustomAppBar(product: agrs.product, page: agrs.page),
+      body: Body(product: agrs.product, page: agrs.page),
     );
   }
 }
 
 class ProductDetailsArguments {
   final Product product;
+  final int page;
 
-  ProductDetailsArguments({@required this.product});
+  ProductDetailsArguments({@required this.product, this.page});
 }

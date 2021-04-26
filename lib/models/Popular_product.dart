@@ -5,6 +5,7 @@ class Product {
   final int id;
   final int groupProduct;
   final int amount;
+  final int countSale;
   final int shopCode;
   final String name;
   final String description;
@@ -21,6 +22,7 @@ class Product {
       {@required this.id,
       @required this.groupProduct,
       @required this.amount,
+      @required this.countSale,
       @required this.favorite,
       @required this.shopCode,
       @required this.name,
@@ -37,6 +39,7 @@ class Product {
         id: jsonData['id'],
         groupProduct: jsonData['groupProduct'],
         amount: jsonData['amount'],
+        countSale: jsonData['countSale'],
         shopCode: jsonData['shopCode'],
         name: jsonData['name'],
         description: jsonData['description'],
@@ -77,6 +80,7 @@ List<Product> demoProducts = [
         "assets/images/4-1.jpg",
         "assets/images/2.jpg",
       ],
+      countSale: 4,
       name: "Wireless Controller for PS4™",
       price: "64.99",
       description: "description",

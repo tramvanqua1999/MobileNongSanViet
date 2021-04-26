@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Popular_product.dart';
+import 'package:shop_app/models/request.dart';
+import 'package:shop_app/straintion/load_screen.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
 
-class SpecialOffers extends StatelessWidget {
-  const SpecialOffers({
-    Key key,
-  }) : super(key: key);
+class SpecialOffers extends StatefulWidget {
+  @override
+  _SpecialOffersState createState() => _SpecialOffersState();
+}
+
+class _SpecialOffersState extends State<SpecialOffers> {
+  Future<List<Product>> productFuture = downloadJSONProduct();
+  Future<List<Product>> saleFuture = downloadJSONHasdiscount();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,7 @@ class SpecialOffers extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
-            title: "Special for you",
+            title: "Ứng dụng",
             press: () {},
             icon: Icons.arrow_right,
           ),
@@ -26,18 +33,42 @@ class SpecialOffers extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 2.png",
-                category: "Smartphone",
-                numOfBrands: 18,
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
-                category: "Fashion",
-                numOfBrands: 24,
-                press: () {},
-              ),
+              FutureBuilder<List<Product>>(
+                  future: productFuture,
+                  //we pass a BuildContext and an AsyncSnapshot object which is an
+                  //Immutable representation of the most recent interaction with
+                  //an asynchronous computation.
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Product> demoProducts = snapshot.data;
+                      return SpecialOfferCard(
+                        image: "assets/images/Image Banner 2.png",
+                        category: "Hiện có",
+                        numOfBrands: demoProducts.length,
+                        press: () {},
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }),
+              FutureBuilder<List<Product>>(
+                  future: saleFuture,
+                  //we pass a BuildContext and an AsyncSnapshot object which is an
+                  //Immutable representation of the most recent interaction with
+                  //an asynchronous computation.
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Product> saleFuture = snapshot.data;
+                      return SpecialOfferCard(
+                        image: "assets/images/Image Banner 3.png",
+                        category: "Giảm giá",
+                        numOfBrands: saleFuture.length,
+                        press: () {},
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }),
               SizedBox(width: getProportionateScreenWidth(20)),
             ],
           ),
@@ -105,7 +136,7 @@ class SpecialOfferCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands Brands")
+                        TextSpan(text: "$numOfBrands Sản phẩm")
                       ],
                     ),
                   ),

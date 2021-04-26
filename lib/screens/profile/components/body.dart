@@ -12,13 +12,15 @@ class Body extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          ProfilePic(),
+          // ProfilePic(),
           SizedBox(height: 20),
           ProfileMenu(
-            text: "My Account",
+            text: "Cập nhật tài khoản",
             icon: "assets/icons/User Icon.svg",
             icons: Icon(Icons.arrow_forward_ios),
-            press: () => {},
+            press: () => {
+              Navigator.pushNamed(context, '/updateProfile'),
+            },
           ),
           ProfileMenu(
             text: "Notifications",
@@ -39,13 +41,16 @@ class Body extends StatelessWidget {
             press: () {},
           ),
           ProfileMenu(
-            text: "Log Out",
+            text: "Đăng xuất",
             icon: "assets/icons/Log out.svg",
             press: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs?.setString("isLoggedIn", '');
-              prefs?.setString("username", '');
-              prefs?.setString("type", '');
+              prefs?.remove("isLoggedIn");
+              prefs?.remove("username");
+              prefs?.remove("type");
+              // prefs?.setString("isLoggedIn", '');
+              // prefs?.setString("username", '');
+              // prefs?.setString("type", '');
               // var session = FlutterSession();
               // await session.set("username", "");
               // await session.set("type", "");

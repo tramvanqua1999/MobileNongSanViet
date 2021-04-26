@@ -5,6 +5,12 @@ import 'package:shop_app/size_config.dart';
 import 'complete_profile_form.dart';
 
 class Body extends StatelessWidget {
+  Body({
+    Key key,
+    @required this.phone,
+  }) : super(key: key);
+  final String phone;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -16,17 +22,16 @@ class Body extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SizedBox(height: SizeConfig.screenHeight * 0.02),
+                Text("Hoàn thành đăng ký", style: headingStyle),
+                Text("Điền đầy đủ thông tin bên dưới",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16)),
                 SizedBox(height: SizeConfig.screenHeight * 0.03),
-                Text("Complete Profile", style: headingStyle),
+                CompleteProfileForm(phone: phone),
+                SizedBox(height: getProportionateScreenHeight(20)),
                 Text(
-                  "Complete your details or continue  \nwith social media",
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: SizeConfig.screenHeight * 0.06),
-                CompleteProfileForm(),
-                SizedBox(height: getProportionateScreenHeight(30)),
-                Text(
-                  "By continuing your confirm that you agree \nwith our Term and Condition",
+                  "Lưu ý: Tài khoản cửa hàng chỉ hoạt động trên website: https://abc.xyz.huy",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.caption,
                 ),

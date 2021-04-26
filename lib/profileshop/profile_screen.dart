@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/Shop.dart';
+import 'package:shop_app/models/Popular_product.dart';
+import 'package:shop_app/models/profileShop.dart';
 
 import 'components/custom_app_bar.dart';
 import 'components/profile_body.dart';
@@ -16,16 +17,18 @@ class _ServieProfileScreenState extends State<ServieProfileScreen> {
   Widget build(BuildContext context) {
     final ShopDetailsArguments agrs = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(product: agrs.product, page: agrs.page),
       body: ShopProfilePage(
-        shop: agrs.shop,
+        shop: agrs.id,
       ),
     );
   }
 }
 
 class ShopDetailsArguments {
-  final Shop shop;
+  final Shop id;
+  final Product product;
+  final int page;
 
-  ShopDetailsArguments({@required this.shop});
+  ShopDetailsArguments({@required this.id, this.product, this.page});
 }

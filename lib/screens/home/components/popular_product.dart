@@ -7,7 +7,7 @@ import '../../../size_config.dart';
 import 'section_title.dart';
 
 class PopularProducts extends StatelessWidget {
-  Future<List<Product>> productFuture = downloadJSONProduct();
+  Future<List<Product>> productFuture = downloadJSONHighestDiscount();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,7 +16,7 @@ class PopularProducts extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
-            title: "Sản phẩm mới",
+            title: "Giảm giá HOT",
             press: () {},
             icon: Icons.arrow_right,
           ),
@@ -38,7 +38,7 @@ class PopularProducts extends StatelessWidget {
                       ...List.generate(
                         demoProducts.length,
                         (index) {
-                          if (demoProducts[index].favorite)
+                          if (demoProducts[index].discount != 0)
                             return ProductCard(product: demoProducts[index]);
 
                           return SizedBox

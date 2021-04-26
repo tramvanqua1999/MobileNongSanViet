@@ -15,7 +15,7 @@ class Background extends StatelessWidget {
       height: getProportionateScreenHeight(200),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/9.jpg'),
+          image: AssetImage('assets/images/backgroundshop.jpg'),
           fit: BoxFit.cover,
         ),
       ),

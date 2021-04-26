@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../size_config.dart';
 
 class Information extends StatelessWidget {
-  const Information({Key key, @required rate})
+  const Information(
+      {Key key, @required rate, @required sumproduct, @required follow})
       : rate = rate,
+        sumproduct = sumproduct,
+        follow = follow,
         super(key: key);
   final double rate;
+  final String sumproduct;
+  final String follow;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +63,7 @@ class Information extends StatelessWidget {
               SizedBox(
                 height: getProportionateScreenHeight(25),
                 child: Text(
-                  '99',
+                  sumproduct,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16.0,
@@ -81,7 +87,7 @@ class Information extends StatelessWidget {
               SizedBox(
                 height: getProportionateScreenHeight(25),
                 child: Text(
-                  '100',
+                  follow,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16.0,

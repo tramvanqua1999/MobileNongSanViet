@@ -15,6 +15,7 @@ class CustomBottomNavBar extends StatelessWidget {
   }) : super(key: key);
 
   final MenuState selectedMenu;
+  final page = 1;
 
   @override
   Widget build(BuildContext context) {

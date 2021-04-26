@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shop_app/models/Popular_product.dart';
 import 'package:shop_app/screens/home/home_screen.dart';
+import 'package:shop_app/screens/list_favorite/list_favorite_screen.dart';
+import 'package:shop_app/screens/products/products_screen.dart';
 
 import '../../../size_config.dart';
 
 class CustomAppBar extends PreferredSize {
-  final double rating;
+  final Product product;
+  final int page;
 
-  CustomAppBar({@required this.rating});
+  CustomAppBar({@required this.product, this.page});
 
   @override
   // AppBar().preferredSize.height provide us the height that appy on our app bar
@@ -30,8 +34,18 @@ class CustomAppBar extends PreferredSize {
                 ),
                 color: Colors.white,
                 padding: EdgeInsets.zero,
-                onPressed: () {
-                  Navigator.pushNamed(context, HomeScreen.routeName);
+                onPressed: () async {
+                  // SharedPreferences prefs =
+                  //     await SharedPreferences.getInstance();
+                  page == 1
+                      ? Navigator.pushNamed(context, HomeScreen.routeName)
+                      : page == 2
+                          ? Navigator.pushNamed(
+                              context, ProductScreen.routeName)
+                          : page == 20
+                              ? Navigator.pushNamed(
+                                  context, ListFavoriteScreen.routeName)
+                              : Navigator.pop(context);
                 },
                 child: SvgPicture.asset(
                   "assets/icons/Back ICon.svg",
@@ -49,7 +63,7 @@ class CustomAppBar extends PreferredSize {
               child: Row(
                 children: [
                   Text(
-                    "$rating",
+                    "${product.rating}",
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,

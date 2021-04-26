@@ -6,7 +6,7 @@ import '../../../size_config.dart';
 import 'section_title.dart';
 
 class SaleProducts extends StatelessWidget {
-  Future<List<Product>> productFuture = downloadJSONProduct();
+  Future<List<Product>> productFuture = downloadJSONLimited();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,12 +37,9 @@ class SaleProducts extends StatelessWidget {
                       ...List.generate(
                         demoProducts.length,
                         (index) {
-                          if (!demoProducts[index].favorite)
-                            return ProductSaleCard(
-                                product: demoProducts[index]);
+                          return ProductSaleCard(product: demoProducts[index]);
 
-                          return SizedBox
-                              .shrink(); // here by default width and height is 0
+                          // here by default width and height is 0
                         },
                       ),
                       SizedBox(width: getProportionateScreenWidth(20)),
