@@ -10,6 +10,7 @@ import '../../../constants.dart';
 import '../../../size_config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:easy_localization/easy_localization.dart';
 
 class CompleteProfileForm extends StatefulWidget {
   const CompleteProfileForm({
@@ -106,13 +107,17 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           ],
         ).show();
       } else if (response.body == "2") {
-        print("Sucessfully: " + response.body);
+        // print("Sucessfully: " + response.body);
         Alert(
           context: context,
           type: AlertType.success,
-          title: "Tạo tài khoản thành công",
+          title: "account successfully created".tr().toString(),
           desc:
-              "Vui lòng đến địa chỉ Website sau để tiến hành bán hàng \n http:\\ShopHandmade.abc.xyz.vn",
+              "please go to the following Website address to proceed with the sale"
+                      .tr()
+                      .toString() +
+                  " \n http:\\" +
+                  "linkShop".tr().toString(),
           buttons: [
             DialogButton(
               child: Text(
@@ -126,28 +131,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           ],
         ).show();
       } else {
-        print("Fail: " + response.body);
+        // print("Fail: " + response.body);
       }
-      // if (response.body != "999") {
-      //   ProcessDialog.closeLoadingDialog();
-      //   if (response.body == "0") {
-      //     if (remember) {
-      //       prefs?.setString("isLoggedIn", response.body);
-      //     }
-
-      //     prefs?.setString("username", userController.text);
-      //     prefs?.setString("type", "0");
-      //     // var session = FlutterSession();
-      //     // await session.set("username", userController.text);
-      //     // await session.set("type", 0);
-      //     Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-      //   }
-      // } else {
-      //   ProcessDialog.closeLoadingDialog();
-      //   passController.clear();
-      //   userController.clear();
-      //   addError(error: kInvalidPasPhoneError);
-      // }
     } catch (e) {
       print(e);
     }
@@ -171,7 +156,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
           // -------------------------------
-          Text("Vui lòng chọn loại tài khoản",
+          Text("please select an account type".tr().toString(),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           Row(
@@ -190,7 +175,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                 },
               ),
               Text(
-                'Khách Hàng',
+                'customer'.tr().toString(),
                 style: new TextStyle(fontSize: 17.0),
               ),
               Radio(
@@ -205,7 +190,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                 },
               ),
               Text(
-                'Cửa hàng',
+                'shop'.tr().toString(),
                 style: new TextStyle(
                   fontSize: 17.0,
                 ),
@@ -216,12 +201,10 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           // -------------------------------
           DefaultButton(
             height: 56,
-            text: "Đăng ký",
+            text: "registration".tr().toString(),
             press: () {
               if (_formKey.currentState.validate()) {
                 _register();
-                // Navigator.pushNamed(context, OtpScreen.routeName);
-                // Navigator.pushNamed(context, CompleteProfileScreen.routeName);
               }
             },
           ),
@@ -248,8 +231,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Địa chỉ",
-        hintText: "Nhập địa chỉ hiện tại",
+        labelText: "address".tr().toString(),
+        hintText: "enter current address".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -277,8 +260,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Họ và tên",
-        hintText: "Nhập tên khách hàng/cửa hàng",
+        labelText: "first and last name".tr().toString(),
+        hintText: "enter the customer / store name".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -311,8 +294,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Xác nhận mật khẩu",
-        hintText: "Nhập lại mật khẩu của bạn",
+        labelText: "confirm password".tr().toString(),
+        hintText: "re-enter your password".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -343,8 +326,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Mật khẩu",
-        hintText: "Nhập mật khẩu của bạn",
+        labelText: "password".tr().toString(),
+        hintText: "enter your password".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -377,7 +360,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       },
       decoration: InputDecoration(
         labelText: "Email",
-        hintText: "Nhập email của bạn",
+        hintText: "enter your email".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,

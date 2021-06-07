@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/screens/home/home_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../size_config.dart';
 
@@ -39,7 +40,7 @@ class CustomAppBar extends PreferredSize {
               width: getProportionateScreenWidth(0),
             ),
             Text(
-              "Danh sách cửa hàng",
+              "list of stores".tr().toString(),
               style: TextStyle(
                 fontWeight: FontWeight.normal,
                 color: Colors.black45,

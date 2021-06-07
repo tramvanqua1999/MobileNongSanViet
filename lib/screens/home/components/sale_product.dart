@@ -3,6 +3,7 @@ import 'package:shop_app/components/product_sale_card.dart';
 import 'package:shop_app/models/Popular_product.dart';
 import 'package:shop_app/models/request.dart';
 import '../../../size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'section_title.dart';
 
 class SaleProducts extends StatelessWidget {
@@ -15,7 +16,7 @@ class SaleProducts extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
-            title: "Sản phẩm HOT",
+            title: "product".tr().toString() + " HOT",
             press: () {},
             icon: Icons.arrow_right,
           ),

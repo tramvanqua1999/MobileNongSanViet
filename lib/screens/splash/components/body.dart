@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // This is the best practice
 import '../components/splash_content.dart';
@@ -17,17 +17,20 @@ class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "text": "Welcome to Handmade Shop, Let’s shop!",
-      "image": "assets/images/splash_1.png"
+      "text": "welcome to Handmade Shop, Let’s shop!".tr().toString(),
+      "image": "assets/images/shop-clipart.jpg"
     },
     {
-      "text":
-          "We help people conect with store \naround United State of America",
-      "image": "assets/images/splash_2.png"
+      "text": "we help people conect with store".tr().toString() +
+          "\n" +
+          "all over Vietnam".tr().toString(),
+      "image": "assets/images/vietnamese-clipart-1.jpg"
     },
     {
-      "text": "We show the easy way to shop. \nJust stay at home with us",
-      "image": "assets/images/splash_3.png"
+      "text": "we show the easy way to shop".tr().toString() +
+          "\n" +
+          "just stay at home with us".tr().toString(),
+      "image": "assets/images/holiday-shopping-clipart-2.png"
     },
   ];
   @override
@@ -70,11 +73,27 @@ class _BodyState extends State<Body> {
                     Spacer(flex: 3),
                     DefaultButton(
                       height: 56,
-                      text: "Continue",
+                      text: "Tiếng Việt",
                       press: () {
+                        setState(() {
+                          setState(() {
+                            EasyLocalization.of(context).locale =
+                                Locale('vi', 'VN');
+                          });
+                        });
                         Navigator.pushNamed(context, SignInScreen.routeName);
-                        // Navigator.pushNamed(
-                        //     context, LoginSuccessScreen.routeName);
+                      },
+                    ),
+                    SizedBox(height: getProportionateScreenHeight(10)),
+                    DefaultButton(
+                      height: 56,
+                      text: "Tiếng Anh",
+                      press: () {
+                        setState(() {
+                          EasyLocalization.of(context).locale =
+                              Locale('en', 'EN');
+                        });
+                        Navigator.pushNamed(context, SignInScreen.routeName);
                       },
                     ),
                     Spacer(),

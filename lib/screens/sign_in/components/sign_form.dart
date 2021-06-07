@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 // import 'package:flutter_session/flutter_session.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
@@ -7,6 +8,7 @@ import 'package:shop_app/helper/keyboard.dart';
 import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:shop_app/straintion/load_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
@@ -64,16 +66,47 @@ class _SignFormState extends State<SignForm> {
 
           prefs?.setString("username", userController.text);
           prefs?.setString("type", "0");
-          // var session = FlutterSession();
-          // await session.set("username", userController.text);
-          // await session.set("type", 0);
           Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+        }
+        if (response.body == "1") {
+          Alert(
+            context: context,
+            type: AlertType.error,
+            title: "error".tr().toString(),
+            desc: "your account has been locked".tr().toString(),
+            buttons: [
+              DialogButton(
+                child: Text(
+                  "OK",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () => Navigator.pop(context),
+                width: 50,
+              )
+            ],
+          ).show();
         }
       } else {
         ProcessDialog.closeLoadingDialog();
         passController.clear();
         userController.clear();
         addError(error: kInvalidPasPhoneError);
+        Alert(
+          context: context,
+          type: AlertType.error,
+          title: "error".tr().toString(),
+          desc: "unsupported account".tr().toString(),
+          buttons: [
+            DialogButton(
+              child: Text(
+                "OK",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 50,
+            )
+          ],
+        ).show();
       }
     } catch (e) {
       print(e);
@@ -103,13 +136,13 @@ class _SignFormState extends State<SignForm> {
                   });
                 },
               ),
-              Text("Remember me"),
+              Text("remember me".tr().toString()),
               Spacer(),
               GestureDetector(
                 onTap: () => Navigator.pushNamed(
                     context, ForgotPasswordScreen.routeName),
                 child: Text(
-                  "Forgot Password",
+                  "forgot Password".tr().toString(),
                   style: TextStyle(decoration: TextDecoration.underline),
                 ),
               )
@@ -119,7 +152,7 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             height: 56,
-            text: "Continue",
+            text: "continue".tr().toString(),
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
@@ -164,8 +197,8 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Password",
-        hintText: "Enter your password",
+        labelText: "password".tr().toString(),
+        hintText: "enter your password".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -201,8 +234,8 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Phone",
-        hintText: "Enter your Phone",
+        labelText: "phone".tr().toString(),
+        hintText: "enter your Phone".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,

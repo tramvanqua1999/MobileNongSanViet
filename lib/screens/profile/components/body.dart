@@ -1,11 +1,84 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shop_app/screens/rules/rules_screen.dart';
 import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
 
 import 'profile_menu.dart';
-import 'profile_pic.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("lang".tr().toString()),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: GestureDetector(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          width: 100,
+                          child: Text("Việt Nam"),
+                        ),
+                        Image.asset(
+                          "assets/images/vn.png",
+                          width: 50,
+                        )
+                      ],
+                    ),
+                    onTap: () {
+                      setState(() {
+                        EasyLocalization.of(context).locale =
+                            Locale('vi', 'VN');
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: GestureDetector(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          width: 100,
+                          child: Text("English"),
+                        ),
+                        Image.asset(
+                          "assets/images/en.png",
+                          width: 50,
+                        )
+                      ],
+                    ),
+                    onTap: () {
+                      setState(() {
+                        EasyLocalization.of(context).locale =
+                            Locale('en', 'EN');
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -15,45 +88,41 @@ class Body extends StatelessWidget {
           // ProfilePic(),
           SizedBox(height: 20),
           ProfileMenu(
-            text: "Cập nhật tài khoản",
+            text: "account update".tr().toString(),
             icon: "assets/icons/User Icon.svg",
             icons: Icon(Icons.arrow_forward_ios),
             press: () => {
               Navigator.pushNamed(context, '/updateProfile'),
             },
           ),
+          // ProfileMenu(
+          //   text: "Notifications",
+          //   icon: "assets/icons/Bell.svg",
+          //   icons: Icon(Icons.arrow_forward_ios),
+          //   press: () {},
+          // ),
           ProfileMenu(
-            text: "Notifications",
-            icon: "assets/icons/Bell.svg",
-            icons: Icon(Icons.arrow_forward_ios),
-            press: () {},
-          ),
-          ProfileMenu(
-            text: "Settings",
+            text: "change language".tr().toString(),
             icon: "assets/icons/Settings.svg",
             icons: Icon(Icons.arrow_forward_ios),
-            press: () {},
+            press: () {
+              _showChoiceDialog(context);
+            },
           ),
           ProfileMenu(
-            text: "Help Center",
-            icon: "assets/icons/Question mark.svg",
-            icons: Icon(Icons.arrow_forward_ios),
-            press: () {},
-          ),
+              text: "rules".tr().toString(),
+              icon: "assets/icons/Question mark.svg",
+              icons: Icon(Icons.arrow_forward_ios),
+              press: () =>
+                  {Navigator.pushNamed(context, RulesScreen.routeName)}),
           ProfileMenu(
-            text: "Đăng xuất",
+            text: "log out".tr().toString(),
             icon: "assets/icons/Log out.svg",
             press: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs?.remove("isLoggedIn");
               prefs?.remove("username");
               prefs?.remove("type");
-              // prefs?.setString("isLoggedIn", '');
-              // prefs?.setString("username", '');
-              // prefs?.setString("type", '');
-              // var session = FlutterSession();
-              // await session.set("username", "");
-              // await session.set("type", "");
               Navigator.pushNamed(context, SignInScreen.routeName);
             },
           ),

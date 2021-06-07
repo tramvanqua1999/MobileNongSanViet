@@ -10,6 +10,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 import 'package:shop_app/components/notificationPlugin.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -50,8 +51,8 @@ class _SignUpFormState extends State<SignUpForm> {
         Alert(
           context: context,
           type: AlertType.error,
-          title: "Lỗi",
-          desc: "Số điện thoại đã được dùng",
+          title: "error".tr().toString(),
+          desc: "phone number already in use".tr().toString(),
           buttons: [
             DialogButton(
               child: Text(
@@ -103,18 +104,13 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(30)),
           DefaultButton(
             height: 56,
-            text: "Tiếp tục",
+            text: "continue".tr().toString(),
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-                // Navigator.pushNamed(context, CompleteProfileScreen.routeName);
                 KeyboardUtil.hideKeyboard(context);
                 ProcessDialog.showLoadingDialog(context);
                 _phone();
-                // Navigator.pushNamed(
-                //   context,
-                //   OtpScreen.routeName,
-                // );
               }
             },
           ),
@@ -125,7 +121,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.number,
       controller: phoneController,
       onSaved: (newValue) => email = newValue,
       onTap: () {
@@ -151,8 +147,8 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Số điện thoại",
-        hintText: "Nhập số điện thoại của bạn",
+        labelText: "phone number".tr().toString(),
+        hintText: "enter your phone number".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -165,10 +161,3 @@ class _SignUpFormState extends State<SignUpForm> {
 
   onNotificationClick(String payload) {}
 }
-
-// class ScreenArguments {
-//   final String checkcode;
-//   final String phone;
-
-//   ScreenArguments(this.checkcode, this.phone);
-// }

@@ -4,6 +4,7 @@ import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/components/no_account_text.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../constants.dart';
 
@@ -20,7 +21,7 @@ class Body extends StatelessWidget {
             children: [
               SizedBox(height: SizeConfig.screenHeight * 0.04),
               Text(
-                "Forgot Password",
+                "forgot Password".tr().toString(),
                 style: TextStyle(
                   fontSize: getProportionateScreenWidth(28),
                   color: Colors.black,
@@ -28,7 +29,9 @@ class Body extends StatelessWidget {
                 ),
               ),
               Text(
-                "Please enter your email and we will send \nyou a link to return to your account",
+                "please enter your email and we will send".tr().toString() +
+                    " \n" +
+                    "you a link to return to your account".tr().toString(),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: SizeConfig.screenHeight * 0.1),
@@ -87,7 +90,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             },
             decoration: InputDecoration(
               labelText: "Email",
-              hintText: "Enter your email",
+              hintText: "enter your email".tr().toString(),
               // If  you are using latest version of flutter then lable text and hint text shown like this
               // if you r using flutter less then 1.20.* then maybe this is not working properly
               floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -99,7 +102,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
           SizedBox(height: SizeConfig.screenHeight * 0.1),
           DefaultButton(
             height: 56,
-            text: "Continue",
+            text: "continue".tr().toString(),
             press: () {
               if (_formKey.currentState.validate()) {
                 // Do what you want to do

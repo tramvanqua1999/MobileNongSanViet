@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter_verification_code/generated/i18n.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/models/Cart.dart';
@@ -11,10 +11,14 @@ import 'package:shop_app/models/request.dart';
 import 'package:shop_app/profileshop/components/information.dart';
 import 'package:shop_app/profileshop/profile_screen.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../constants.dart';
 import 'product_description.dart';
 import 'top_rounded_container.dart';
 import 'product_images.dart';
+import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
   const Body({Key key, @required this.product, this.page}) : super(key: key);
@@ -30,6 +34,7 @@ class _BodyState extends State<Body> {
   Product product;
   int page;
   int numOfItems = 1;
+  var rating = 3.5;
   @override
   void initState() {
     // TODO: implement initState
@@ -40,74 +45,149 @@ class _BodyState extends State<Body> {
   Future<void> checkfutureFollow;
   Future<int> countFollow;
 
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text("cancel".tr().toString()),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = FlatButton(
+      child: Text("confirm".tr().toString()),
+      onPressed: () async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var username = prefs?.getString("username");
+
+        try {
+          final response = await http.post(url + "ratingproduct", body: {
+            "username": username,
+            "id": json.encode(product.id),
+            "rating": json.encode(rating),
+          });
+          print(response.body);
+          if (response.statusCode == 200) {
+            Navigator.pop(context);
+            final snackBar = SnackBar(
+              content: Text('successful product reviews'.tr().toString()),
+              duration: Duration(seconds: 2),
+              action: new SnackBarAction(
+                label: 'success'.tr().toString(),
+                onPressed: () {
+                  // Some code to undo the change!
+                },
+              ),
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
+          } else if (response.statusCode == 201) {
+            Navigator.pop(context);
+            final snackBar = SnackBar(
+              content:
+                  Text('you have already rated this product'.tr().toString()),
+              duration: Duration(seconds: 2),
+              action: new SnackBarAction(
+                label: 'failure'.tr().toString(),
+                onPressed: () {
+                  // Some code to undo the change!
+                },
+              ),
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
+          }
+        } catch (e) {
+          print(e);
+        }
+      },
+    );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("evaluate".tr().toString()),
+      content: Text("confirmed reviews of this product?".tr().toString()),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     countFollow = downloadCountFollow(product.shopCode);
-    return Stack(children: [
-      SingleChildScrollView(
-        child: Stack(children: [
-          SafeArea(
-            child: Column(
-              children: <Widget>[
-                ProductImages(product: product),
-                SizedBox(
-                  height: getProportionateScreenHeight(8),
-                ),
-                TopRoundedContainer(
-                  color: Colors.white,
-                  child: Column(
-                    children: <Widget>[
-                      ProductDescription(
-                        product: product,
-                        pressOnSeeMore: () {},
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: getProportionateScreenWidth(20),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            buildOutlineButton(
-                              icon: Icons.remove,
-                              press: () {
-                                if (numOfItems > 1) {
-                                  setState(() {
-                                    numOfItems--;
-                                  });
-                                }
-                              },
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10,
-                              ),
-                              child: Text(
-                                // if our item is less  then 10 then  it shows 01 02 like that
-                                numOfItems.toString().padLeft(2, "0"),
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                            ),
-                            buildOutlineButton(
-                                icon: Icons.add,
-                                press: () {
-                                  setState(() {
-                                    numOfItems == product.amount
-                                        ? numOfItems
-                                        : numOfItems++;
-                                  });
-                                }),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: getProportionateScreenHeight(10)),
-                      FutureBuilder<Shop>(
-                          future: downloadJSONShop(product.shopCode),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              Shop shop = snapshot.data;
-                              futureFollow = downloadFollow(shop.id);
+    return FutureBuilder<Shop>(
+        future: downloadJSONShop(product.shopCode),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Shop shop = snapshot.data;
+            futureFollow = downloadFollow(shop.id);
 
-                              return Column(
+            return Stack(children: [
+              SingleChildScrollView(
+                child: Stack(children: [
+                  SafeArea(
+                    child: Column(
+                      children: <Widget>[
+                        ProductImages(product: product),
+                        SizedBox(
+                          height: getProportionateScreenHeight(8),
+                        ),
+                        TopRoundedContainer(
+                          color: Colors.white,
+                          child: Column(
+                            children: <Widget>[
+                              ProductDescription(
+                                product: product,
+                                pressOnSeeMore: () {},
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: getProportionateScreenWidth(20),
+                                ),
+                                child: Row(
+                                  children: <Widget>[
+                                    buildOutlineButton(
+                                      icon: Icons.remove,
+                                      press: () {
+                                        if (numOfItems > 1) {
+                                          setState(() {
+                                            numOfItems--;
+                                          });
+                                        }
+                                      },
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                      ),
+                                      child: Text(
+                                        // if our item is less  then 10 then  it shows 01 02 like that
+                                        numOfItems.toString().padLeft(2, "0"),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6,
+                                      ),
+                                    ),
+                                    buildOutlineButton(
+                                        icon: Icons.add,
+                                        press: () {
+                                          setState(() {
+                                            numOfItems == product.amount
+                                                ? numOfItems
+                                                : numOfItems++;
+                                          });
+                                        }),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                  height: getProportionateScreenHeight(10)),
+                              Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -117,7 +197,11 @@ class _BodyState extends State<Body> {
                                           getProportionateScreenHeight(20),
                                     ),
                                     child: Text(
-                                      "Lưu ý: \n" + "Phí ship : " + shop.price,
+                                      "note".tr().toString() +
+                                          ": \n" +
+                                          "shipping fee".tr().toString() +
+                                          ": " +
+                                          shop.price,
                                     ),
                                   ),
                                   Padding(
@@ -125,12 +209,69 @@ class _BodyState extends State<Body> {
                                       horizontal:
                                           getProportionateScreenHeight(20),
                                     ),
-                                    child: Text(
-                                      shop.price.isEmpty
-                                          ? SizedBox()
-                                          : "Mua hàng trên " +
-                                              shop.fee +
-                                              " được free ship",
+                                    child: Text(shop.price.isEmpty
+                                        ? SizedBox()
+                                        : "buy on".tr().toString() +
+                                            " " +
+                                            shop.fee +
+                                            "exempt from ship".tr().toString()),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            getProportionateScreenHeight(20),
+                                        vertical:
+                                            getProportionateScreenHeight(10)),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "evaluate".tr().toString() + ": ",
+                                          style: TextStyle(fontSize: 16.0),
+                                        ),
+                                        SmoothStarRating(
+                                          rating: product.rating,
+                                          isReadOnly: false,
+                                          size: 26,
+                                          filledIconData: Icons.star,
+                                          halfFilledIconData: Icons.star_half,
+                                          defaultIconData: Icons.star_border,
+                                          starCount: 5,
+                                          allowHalfRating: true,
+                                          spacing: 2.0,
+                                          onRated: (value) {
+                                            rating = value;
+                                          },
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            showAlertDialog(context);
+                                          },
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left:
+                                                    getProportionateScreenWidth(
+                                                        20)),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.green,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(
+                                                    getProportionateScreenHeight(
+                                                        4.5)),
+                                                child: Text(
+                                                  "confirm".tr().toString(),
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   Padding(
@@ -171,7 +312,7 @@ class _BodyState extends State<Body> {
                                                       70),
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                     shop.img,
                                                   ),
                                                   fit: BoxFit.cover,
@@ -235,8 +376,12 @@ class _BodyState extends State<Body> {
                                                               4.5)),
                                                       child: Text(
                                                         snapshot.data == true
-                                                            ? " Đã theo dõi "
-                                                            : " Theo dõi ",
+                                                            ? "followed"
+                                                                .tr()
+                                                                .toString()
+                                                            : "follow"
+                                                                .tr()
+                                                                .toString(),
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                         ),
@@ -266,91 +411,112 @@ class _BodyState extends State<Body> {
                                         }
                                       })
                                 ],
-                              );
-                            } else if (snapshot.hasError) {
-                              return Text("${snapshot.error}");
-                            } else {
-                              return Container();
-                            }
-                          }),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: getProportionateScreenHeight(2)),
-                        child: Container(
-                          height: getProportionateScreenHeight(2),
-                          color: Color(0xFFEFF4F7),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: getProportionateScreenHeight(2)),
+                                child: Container(
+                                  height: getProportionateScreenHeight(2),
+                                  color: Color(0xFFEFF4F7),
+                                ),
+                              ),
+                              SizedBox(
+                                height: getProportionateScreenHeight(100),
+                              ),
+                            ],
+                          ),
                         ),
+                      ],
+                    ),
+                  ),
+                ]),
+              ),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  height: 80,
+                  width: SizeConfig.screenWidth,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFDBDEE4),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: SizeConfig.screenWidth * 0.15,
+                      right: SizeConfig.screenWidth * 0.15,
+                      bottom: getProportionateScreenWidth(10),
+                      top: getProportionateScreenWidth(10),
+                    ),
+                    child: Container(
+                      child: DefaultButton(
+                        height: 200,
+                        text: "add To Cart".tr().toString(),
+                        press: () {
+                          if ((demoCarts.where(
+                                  (element) => element.product == product))
+                              .isEmpty) {
+                            if (double.parse(product.priceDiscount
+                                        .replaceAll(' ₫', '')) *
+                                    numOfItems *
+                                    1000 >=
+                                double.parse(shop.fee.replaceAll(' ₫', '')) *
+                                    1000) {
+                              demoCarts.add(Cart(
+                                  product: product,
+                                  numOfItem: numOfItems,
+                                  priceship: 0));
+                            } else {
+                              demoCarts.add(Cart(
+                                  product: product,
+                                  numOfItem: numOfItems,
+                                  priceship: double.parse(
+                                          shop.price.replaceAll(' ₫', '')) *
+                                      1000));
+                            }
+
+                            final snackBar = SnackBar(
+                              content: Text(
+                                  'add to cart successfully'.tr().toString()),
+                              duration: Duration(seconds: 2),
+                              action: new SnackBarAction(
+                                label: 'success'.tr().toString(),
+                                onPressed: () {
+                                  // Some code to undo the change!
+                                },
+                              ),
+                            );
+                            Scaffold.of(context).showSnackBar(snackBar);
+                          } else {
+                            final snackBar = SnackBar(
+                              content: Text('the product has been added to cart'
+                                  .tr()
+                                  .toString()),
+                              duration: Duration(seconds: 2),
+                              action: new SnackBarAction(
+                                label: 'failure'.tr().toString(),
+                                onPressed: () {
+                                  // Some code to undo the change!
+                                },
+                              ),
+                            );
+                            Scaffold.of(context).showSnackBar(snackBar);
+                          }
+                        },
                       ),
-                      SizedBox(
-                        height: getProportionateScreenHeight(100),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ),
-        ]),
-      ),
-      Positioned(
-        bottom: 0,
-        child: Container(
-          height: 80,
-          width: SizeConfig.screenWidth,
-          decoration: BoxDecoration(
-            color: Color(0xFFDBDEE4),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40),
-              topRight: Radius.circular(40),
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: SizeConfig.screenWidth * 0.15,
-              right: SizeConfig.screenWidth * 0.15,
-              bottom: getProportionateScreenWidth(10),
-              top: getProportionateScreenWidth(10),
-            ),
-            child: Container(
-              child: DefaultButton(
-                height: 200,
-                text: "Add To Cart",
-                press: () {
-                  if ((demoCarts.where((element) => element.product == product))
-                      .isEmpty) {
-                    demoCarts
-                        .add(Cart(product: product, numOfItem: numOfItems));
-                    final snackBar = SnackBar(
-                      content: Text('Thêm vào giỏ hàng thành công'),
-                      duration: Duration(seconds: 2),
-                      action: new SnackBarAction(
-                        label: 'Success',
-                        onPressed: () {
-                          // Some code to undo the change!
-                        },
-                      ),
-                    );
-                    Scaffold.of(context).showSnackBar(snackBar);
-                  } else {
-                    final snackBar = SnackBar(
-                      content: Text('Sản phẩm đã được thêm vào giỏ hàng'),
-                      duration: Duration(seconds: 2),
-                      action: new SnackBarAction(
-                        label: 'Fail',
-                        onPressed: () {
-                          // Some code to undo the change!
-                        },
-                      ),
-                    );
-                    Scaffold.of(context).showSnackBar(snackBar);
-                  }
-                },
               ),
-            ),
-          ),
-        ),
-      ),
-    ]);
+            ]);
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          } else {
+            return Container();
+          }
+        });
   }
 
   SizedBox buildOutlineButton({IconData icon, Function press}) {

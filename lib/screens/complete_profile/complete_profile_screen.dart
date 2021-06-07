@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'components/body.dart';
 
@@ -9,7 +10,7 @@ class CompleteProfileScreen extends StatelessWidget {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: Text('sign Up'.tr().toString()),
       ),
       body: Body(
         phone: args.phone,

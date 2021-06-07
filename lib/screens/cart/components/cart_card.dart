@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/Cart.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -48,6 +50,22 @@ class CartCard extends StatelessWidget {
                 children: [
                   TextSpan(
                       text: " x${cart.numOfItem}",
+                      style: Theme.of(context).textTheme.bodyText1),
+                ],
+              ),
+            ),
+            Text.rich(
+              TextSpan(
+                text: "delivery charges".tr().toString() + ": ",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600, color: Colors.black54),
+                children: [
+                  TextSpan(
+                      // text: " ${cart.priceship * 1000} " + " ₫",
+                      text: NumberFormat("#,###", "pt_BR")
+                              .format((cart.priceship))
+                              .toString() +
+                          " ₫",
                       style: Theme.of(context).textTheme.bodyText1),
                 ],
               ),

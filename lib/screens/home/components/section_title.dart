@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SectionTitle extends StatelessWidget {
   SectionTitle({
@@ -31,7 +32,7 @@ class SectionTitle extends StatelessWidget {
             GestureDetector(
               onTap: press,
               child: Text(
-                "See More",
+                "see More".tr().toString(),
                 style: TextStyle(color: Color(0xFFBBBBBB)),
               ),
             ),

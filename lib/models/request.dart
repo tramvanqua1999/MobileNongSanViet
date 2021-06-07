@@ -9,6 +9,8 @@ import 'package:shop_app/models/profileShop.dart';
 
 import '../constants.dart';
 import 'Customer.dart';
+import 'comments.dart';
+import 'dart:io';
 
 Future<List<Product>> downloadJSONProduct() async {
   final jsonEndpoint = url + "product";
@@ -18,8 +20,11 @@ Future<List<Product>> downloadJSONProduct() async {
   if (response.statusCode == 200) {
     List products = json.decode(response.body);
     return products.map((product) => new Product.fromJson(product)).toList();
-  } else
-    throw Exception('We were not able to successfully download the json data.');
+  } else {
+    // throw Exception('We were not able to successfully download the json data.');
+    sleep(const Duration(seconds: 2));
+    downloadJSONProduct();
+  }
 }
 
 Future<List<Shop>> downloadJSONListFollow() async {
@@ -34,8 +39,11 @@ Future<List<Shop>> downloadJSONListFollow() async {
   if (response.statusCode == 200) {
     List products = json.decode(response.body);
     return products.map((product) => new Shop.fromJson(product)).toList();
-  } else
-    throw Exception('We were not able to successfully download the json data.');
+  } else {
+    sleep(const Duration(seconds: 2));
+    downloadJSONListFollow();
+  }
+  // throw Exception('We were not able to successfully download the json data.');
 }
 
 Future<List<Product>> downloadJSONListProductFollow() async {
@@ -50,44 +58,54 @@ Future<List<Product>> downloadJSONListProductFollow() async {
   if (response.statusCode == 200) {
     List products = json.decode(response.body);
     return products.map((product) => new Product.fromJson(product)).toList();
-  } else
-    throw Exception('We were not able to successfully download the json data.');
+  } else {
+    sleep(const Duration(seconds: 2));
+    downloadJSONListProductFollow();
+  }
+  // throw Exception('We were not able to successfully download the json data.');
 }
 
 Future<List<Product>> downloadJSONHighestDiscount() async {
   final jsonEndpoint = url + "highestdiscount";
 
   final response = await http.get(jsonEndpoint);
-  print(response.body);
+  // print(response.body);
   if (response.statusCode == 200) {
     List products = json.decode(response.body);
     return products.map((product) => new Product.fromJson(product)).toList();
-  } else
-    throw Exception('We were not able to successfully download the json data.');
+  } else {
+    sleep(const Duration(seconds: 2));
+    downloadJSONHighestDiscount();
+  }
+  // throw Exception('We were not able to successfully download the json data.');
 }
 
 Future<List<Product>> downloadJSONHasdiscount() async {
   final jsonEndpoint = url + "hasdiscount";
 
   final response = await http.get(jsonEndpoint);
-  print(response.body);
+  // print(response.body);
   if (response.statusCode == 200) {
     List products = json.decode(response.body);
     return products.map((product) => new Product.fromJson(product)).toList();
-  } else
+  } else {
     throw Exception('We were not able to successfully download the json data.');
+  }
 }
 
 Future<List<Product>> downloadJSONLimited() async {
   final jsonEndpoint = url + "limited";
 
   final response = await http.get(jsonEndpoint);
-  print(response.body);
+  // print(response.body);
   if (response.statusCode == 200) {
     List products = json.decode(response.body);
     return products.map((product) => new Product.fromJson(product)).toList();
-  } else
-    throw Exception('We were not able to successfully download the json data.');
+  } else {
+    sleep(const Duration(seconds: 2));
+    downloadJSONLimited();
+  }
+  // throw Exception('We were not able to successfully download the json data.');
 }
 
 Future<List<Product>> downloadProductShopSale(int shopCode) async {
@@ -101,8 +119,11 @@ Future<List<Product>> downloadProductShopSale(int shopCode) async {
   if (response.statusCode == 200) {
     List productsale = json.decode(response.body);
     return productsale.map((sale) => new Product.fromJson(sale)).toList();
-  } else
-    throw Exception('We were not able to successfully download the json data.');
+  } else {
+    sleep(const Duration(seconds: 2));
+    downloadProductShopSale(shopCode);
+  }
+  // throw Exception('We were not able to successfully download the json data.');
 }
 
 Future<List<Product>> downloadProductShop(int shopCode) async {
@@ -115,8 +136,11 @@ Future<List<Product>> downloadProductShop(int shopCode) async {
   if (response.statusCode == 200) {
     List productsale = json.decode(response.body);
     return productsale.map((sale) => new Product.fromJson(sale)).toList();
-  } else
-    throw Exception('We were not able to successfully download the json data.');
+  } else {
+    sleep(const Duration(seconds: 2));
+    downloadProductShop(shopCode);
+  }
+  // throw Exception('We were not able to successfully download the json data.');
 }
 
 Future<int> downloadCountFollow(int shopcode) async {
@@ -128,8 +152,10 @@ Future<int> downloadCountFollow(int shopcode) async {
   if (response.statusCode == 200) {
     int countFollow = json.decode(response.body);
     return countFollow;
-  } else
+  } else {
+    // downloadCountFollow(shopcode);
     throw Exception('We were not able to successfully download the json data.');
+  }
 }
 
 Future<Shop> downloadJSONShop(int shopCode) async {
@@ -143,8 +169,10 @@ Future<Shop> downloadJSONShop(int shopCode) async {
   if (response.statusCode == 200) {
     var shop = json.decode(response.body)[0];
     return Shop.fromJson(shop);
-  } else
+  } else {
+    // downloadJSONShop(shopCode);
     throw Exception('We were not able to successfully download the json data.');
+  }
 }
 
 Future<Customer> downloadJSONGetProfile() async {
@@ -159,20 +187,23 @@ Future<Customer> downloadJSONGetProfile() async {
   if (response.statusCode == 200) {
     var shop = json.decode(response.body)[0];
     return Customer.fromJson(shop);
-  } else
+  } else {
+    // downloadJSONGetProfile();
     throw Exception('We were not able to successfully download the json data.');
+  }
 }
 
 Future<bool> downloadFavorite(int productCode) async {
   final jsonEndpoint = url + "favorite";
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final username = prefs?.getString("username");
+
   var id = json.encode(productCode);
   final response = await http.post(jsonEndpoint, body: {
     "productCode": id,
     "username": username,
   });
-  print(response.body);
+  // print(response.body);
   if (response.body == "true") {
     return true;
   } else {
@@ -189,11 +220,31 @@ Future<bool> downloadFollow(int shopCode) async {
     "shopCode": id,
     "username": username,
   });
-  print(response.body);
+  // print(response.body);
   if (response.body == "true") {
     return true;
   } else {
     return false;
+  }
+}
+
+Future<List<CommentModel>> downloadJSONComment(int shopcode) async {
+  final jsonEndpoint = url + "listcomment";
+
+  var usernameId = json.encode(shopcode);
+
+  final response = await http.post(jsonEndpoint, body: {
+    "shopcode": usernameId,
+  });
+  print(response.body);
+  if (response.statusCode == 200) {
+    List commentModels = json.decode(response.body);
+    return commentModels
+        .map((commentModel) => new CommentModel.fromJson(commentModel))
+        .toList();
+  } else {
+    // downloadJSONComment(shopcode);
+    throw Exception('We were not able to successfully download the json data.');
   }
 }
 

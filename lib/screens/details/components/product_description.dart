@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/models/Popular_product.dart';
 import 'package:shop_app/models/request.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -56,18 +57,20 @@ class _ProductDescriptionState extends State<ProductDescription> {
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
-            child: Text("Giảm giá: " + checkdiscount()),
+            child: Text("discount".tr().toString() + ": " + checkdiscount()),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
-            child: Text("Giá: " + checkprice()),
+            child: Text("price".tr().toString() + ": " + checkprice()),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
             child: Text(
-              "Số lượng còn lại: " + product.amount.toString(),
+              "the remaining amount".tr().toString() +
+                  ": " +
+                  product.amount.toString(),
             ),
           ),
           FutureBuilder<bool>(
@@ -115,7 +118,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
               right: getProportionateScreenWidth(64),
             ),
             child: Text(
-              "Mô tả: \n" + product.description,
+              "describe".tr().toString() + ": \n" + product.description,
               maxLines: numline,
             ),
           ),
@@ -139,7 +142,9 @@ class _ProductDescriptionState extends State<ProductDescription> {
               child: Row(
                 children: [
                   Text(
-                    isShow ? "Hidden More Detail" : "See More Detail",
+                    isShow
+                        ? "hidden More".tr().toString()
+                        : "see More".tr().toString(),
                     style: TextStyle(
                         fontWeight: FontWeight.w600, color: kPrimaryColor),
                   ),
@@ -163,7 +168,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
         product.lastday.difference(DateTime.now()).inDays > 1)
       return product.discount.toString() + " %";
     else
-      return "Không";
+      return "no".tr().toString();
   }
 
   String checkprice() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'otp_form.dart';
 
@@ -12,9 +13,6 @@ class Body extends StatelessWidget {
   }) : super(key: key);
   final String checkcode;
   final String phone;
-
- 
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +26,19 @@ class Body extends StatelessWidget {
             children: [
               SizedBox(height: SizeConfig.screenHeight * 0.05),
               Text(
-                "OTP Verification",
+                "OTP Verification".tr().toString(),
                 style: headingStyle,
               ),
-              Text("We sent your code to " + phone ),
+              Text("We sent your code to".tr().toString() + " " + phone),
               buildTimer(),
-              OtpForm( checkcode: checkcode, phone: phone),
+              OtpForm(checkcode: checkcode, phone: phone),
               SizedBox(height: SizeConfig.screenHeight * 0.1),
               GestureDetector(
                 onTap: () {
                   // OTP code resend
                 },
                 child: Text(
-                  "Resend OTP Code",
+                  "resend OTP Code".tr().toString(),
                   style: TextStyle(decoration: TextDecoration.underline),
                 ),
               )
@@ -55,7 +53,7 @@ class Body extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("This code will expired in "),
+        Text("this code will expired in".tr().toString() + " "),
         TweenAnimationBuilder(
           tween: Tween(begin: 60.0, end: 0.0),
           duration: Duration(seconds: 30),

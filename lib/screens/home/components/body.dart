@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/screens/home/components/categoriesfirst.dart';
 import 'package:shop_app/screens/home/components/list_product.dart';
 import 'package:shop_app/screens/home/components/sale_product.dart';
 
 import '../../../size_config.dart';
-import 'categories.dart';
 import 'discount_banner.dart';
 import 'home_header.dart';
 import 'popular_product.dart';
 import 'special_offers.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

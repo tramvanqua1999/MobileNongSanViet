@@ -13,7 +13,6 @@ class Product {
   final double rating;
   final String price;
   final DateTime create;
-  final bool favorite;
   final int discount;
   final DateTime lastday;
   final String priceDiscount;
@@ -23,7 +22,6 @@ class Product {
       @required this.groupProduct,
       @required this.amount,
       @required this.countSale,
-      @required this.favorite,
       @required this.shopCode,
       @required this.name,
       @required this.description,
@@ -49,7 +47,6 @@ class Product {
                 .format(double.parse(jsonData['price'].toString())) +
             " ₫",
         create: DateTime.parse(jsonData['create']),
-        favorite: jsonData['Favor'] == 0 ? true : false,
         discount: jsonData['discount'],
         lastday: DateTime.parse(jsonData['lastday']),
         priceDiscount: NumberFormat("#,###", "pt_BR")
@@ -85,7 +82,6 @@ List<Product> demoProducts = [
       price: "64.99",
       description: "description",
       rating: 1.8,
-      favorite: false,
       priceDiscount: "10",
       discount: 10,
       lastday: DateTime.now()),

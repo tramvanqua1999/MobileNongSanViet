@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../../size_config.dart';
 
 class DiscountBanner extends StatelessWidget {
@@ -25,9 +25,9 @@ class DiscountBanner extends StatelessWidget {
         TextSpan(
           style: TextStyle(color: Colors.white),
           children: [
-            TextSpan(text: "Chào mừng đến với ứng dụng\n"),
+            TextSpan(text: "welcome to the app".tr().toString() + "\n"),
             TextSpan(
-              text: "Trãi nghiệm sản phẩm cực HOT",
+              text: "experience extremely HOT products".tr().toString(),
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(16),
                 fontWeight: FontWeight.bold,

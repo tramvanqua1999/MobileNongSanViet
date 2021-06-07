@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/size_config.dart';
 
 class Background extends StatelessWidget {
-  const Background({
-    Key key,
-    @required this.screenSize,
-  }) : super(key: key);
+  const Background({Key key, @required this.screenSize, @required this.imgbg})
+      : super(key: key);
+  final String imgbg;
 
   final Size screenSize;
 
@@ -15,7 +14,7 @@ class Background extends StatelessWidget {
       height: getProportionateScreenHeight(200),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/backgroundshop.jpg'),
+          image: NetworkImage(imgbg),
           fit: BoxFit.cover,
         ),
       ),

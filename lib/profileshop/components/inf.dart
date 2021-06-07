@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/profileShop.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../size_config.dart';
 
@@ -36,7 +37,7 @@ class _InfState extends State<Inf> {
                 Icons.store,
                 color: Colors.grey[500],
               ),
-              title: Text("Tên cửa hàng"),
+              title: Text("name of the store".tr().toString()),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -54,7 +55,7 @@ class _InfState extends State<Inf> {
                 Icons.location_on,
                 color: Colors.grey[500],
               ),
-              title: Text("Địa chỉ"),
+              title: Text("address".tr().toString()),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -92,7 +93,7 @@ class _InfState extends State<Inf> {
                 Icons.phone,
                 color: Colors.grey[500],
               ),
-              title: Text("Số điện thoại"),
+              title: Text("phone".tr().toString()),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -113,7 +114,7 @@ class _InfState extends State<Inf> {
     if (shop.phone != null) {
       return shop.phone.toString();
     } else {
-      return "Không";
+      return "no".tr().toString();
     }
   }
 }

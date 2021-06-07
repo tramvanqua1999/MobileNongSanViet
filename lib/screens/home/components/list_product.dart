@@ -6,6 +6,7 @@ import 'package:shop_app/models/request.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/screens/home/components/section_title.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../constants.dart';
 
@@ -36,7 +37,7 @@ class _ListProductState extends State<ListProduct> {
         padding:
             EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
         child: SectionTitle(
-          title: "Tất cả sản phẩm",
+          title: "all products".tr().toString(),
           press: () {},
           icon: Icons.arrow_drop_down,
         ),

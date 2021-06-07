@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/no_account_text.dart';
 import 'package:shop_app/components/socal_card.dart';
 import '../../../size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'sign_form.dart';
 
 class Body extends StatelessWidget {
@@ -18,7 +19,7 @@ class Body extends StatelessWidget {
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Text(
-                  "Welcome Back",
+                  "welcome".tr().toString(),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: getProportionateScreenWidth(28),
@@ -26,7 +27,9 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Sign in with your phone and password  \nor continue with social media",
+                  "sign in with your phone and password".tr().toString() +
+                      "  \n" +
+                      "or continue with social media".tr().toString(),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),

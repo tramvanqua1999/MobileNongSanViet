@@ -8,6 +8,7 @@ import 'package:shop_app/models/profileShop.dart';
 import 'package:shop_app/models/request.dart';
 import 'package:shop_app/screens/details_Shop/details_screen.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../constants.dart';
 
@@ -55,7 +56,7 @@ class _ProductSaleState extends State<ProductShop> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Tất cả sản phẩm",
+                "all products".tr().toString(),
                 style: TextStyle(
                   fontSize: getProportionateScreenWidth(15),
                   color: Colors.black,
@@ -66,7 +67,7 @@ class _ProductSaleState extends State<ProductShop> {
                   GestureDetector(
                     onTap: () {},
                     child: Text(
-                      "See More",
+                      "see More".tr().toString(),
                       style: TextStyle(color: Color(0xFFBBBBBB)),
                     ),
                   ),

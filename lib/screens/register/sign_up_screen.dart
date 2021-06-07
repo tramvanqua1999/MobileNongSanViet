@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'components/body.dart';
 
@@ -8,7 +9,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: Text("sign Up".tr().toString()),
       ),
       body: Body(),
     );

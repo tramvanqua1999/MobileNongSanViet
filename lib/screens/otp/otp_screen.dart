@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'components/body.dart';
 
@@ -12,7 +13,7 @@ class OtpScreen extends StatelessWidget {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text("OTP Verification"),
+        title: Text("OTP Verification".tr().toString()),
       ),
       body: Body(
         checkcode: args.checkcode,

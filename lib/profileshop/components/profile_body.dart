@@ -5,6 +5,7 @@ import 'package:shop_app/profileshop/components/productShop.dart';
 import 'package:shop_app/profileshop/components/productShopSale.dart';
 import 'package:shop_app/models/request.dart';
 import 'package:shop_app/profileshop/components/rating_Shop.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../size_config.dart';
 import 'Unline.dart';
 import 'background.dart';
@@ -33,7 +34,12 @@ class _ShopProfilePageState extends State<ShopProfilePage> {
     super.initState();
   }
 
-  List<String> categories = ["Thông tin", "Giảm giá", "Sản phẩm", "Đánh giá"];
+  List<String> categories = [
+    "information".tr().toString(),
+    "discount".tr().toString(),
+    "product".tr().toString(),
+    "evaluate".tr().toString()
+  ];
   int selectedIndex = 0;
   // final String _bio =
   //     "\"Hi, I am a Freelance developer working for hourly basis. If you wants to contact me to build your product leave a message.\"";
@@ -52,7 +58,7 @@ class _ShopProfilePageState extends State<ShopProfilePage> {
           SingleChildScrollView(
             child: Stack(
               children: <Widget>[
-                Background(screenSize: screenSize),
+                Background(screenSize: screenSize, imgbg: shop.imgBg),
                 SafeArea(
                   child: Column(
                     children: <Widget>[
@@ -101,8 +107,8 @@ class _ShopProfilePageState extends State<ShopProfilePage> {
                                           child: Center(
                                             child: Text(
                                               snapshot.data == true
-                                                  ? " Đã theo dõi "
-                                                  : " Theo dõi ",
+                                                  ? "followed".tr().toString()
+                                                  : "follow".tr().toString(),
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 17),
@@ -138,7 +144,7 @@ class _ShopProfilePageState extends State<ShopProfilePage> {
                           }),
                       Description(
                           bio: shop.description == null
-                              ? "Shop chưa thêm mô tả"
+                              ? "shop has not added description".tr().toString()
                               : shop.description),
                       Unline(screenSize: screenSize),
                       Padding(
@@ -207,7 +213,9 @@ class _ShopProfilePageState extends State<ShopProfilePage> {
                               shop: shop,
                             )
                           : Container(),
-                      selectedIndex == 3 ? RatingShop() : Container(),
+                      selectedIndex == 3
+                          ? RatingShop(id: shop.id)
+                          : Container(),
                     ],
                   ),
                 ),

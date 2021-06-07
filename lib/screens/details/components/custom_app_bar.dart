@@ -41,7 +41,8 @@ class CustomAppBar extends PreferredSize {
                       ? Navigator.pushNamed(context, HomeScreen.routeName)
                       : page == 2
                           ? Navigator.pushNamed(
-                              context, ProductScreen.routeName)
+                              context, ProductScreen.routeName,
+                              arguments: ProductDetailsArguments(search: ''))
                           : page == 20
                               ? Navigator.pushNamed(
                                   context, ListFavoriteScreen.routeName)

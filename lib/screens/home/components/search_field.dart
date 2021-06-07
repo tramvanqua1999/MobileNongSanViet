@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-
+import 'package:shop_app/screens/products/products_screen.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField({
+  SearchField({
     Key key,
   }) : super(key: key);
+  String search;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,9 @@ class SearchField extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextField(
-        onChanged: (value) => print(value),
+        onChanged: (value) {
+          search = value;
+        },
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20),
@@ -25,8 +29,14 @@ class SearchField extends StatelessWidget {
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
-            hintText: "Tìm kiếm sản phẩm",
-            prefixIcon: Icon(Icons.search)),
+            hintText: "search product".tr().toString(),
+            prefixIcon: InkWell(
+                onTap: () => Navigator.pushNamed(
+                      context,
+                      ProductScreen.routeName,
+                      arguments: ProductDetailsArguments(search: search),
+                    ),
+                child: Icon(Icons.search))),
       ),
     );
   }

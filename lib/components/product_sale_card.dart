@@ -70,7 +70,8 @@ class _ProductSaleCardState extends State<ProductSaleCard> {
                     ),
                   ),
                 ),
-                product.discount != 0
+                product.discount != 0 &&
+                        product.lastday.difference(DateTime.now()).inDays > 1
                     ? Positioned(
                         top: 0,
                         right: 0,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/screens/complete_profile/complete_profile_screen.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../constants.dart';
 
@@ -148,7 +149,7 @@ class _OtpFormState extends State<OtpForm> {
           SizedBox(height: SizeConfig.screenHeight * 0.15),
           DefaultButton(
             height: 56,
-            text: "Continue",
+            text: "continue".tr().toString(),
             press: () {
               code = number1.text + number2.text + number3.text + number4.text;
               check_success();

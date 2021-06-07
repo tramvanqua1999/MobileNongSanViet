@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/models/Popular_product.dart';
 import 'package:shop_app/models/request.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
@@ -16,7 +17,7 @@ class PopularProducts extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
-            title: "Giảm giá HOT",
+            title: "discount".tr().toString() + " HOT",
             press: () {},
             icon: Icons.arrow_right,
           ),
@@ -26,9 +27,6 @@ class PopularProducts extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: FutureBuilder<List<Product>>(
               future: productFuture,
-              //we pass a BuildContext and an AsyncSnapshot object which is an
-              //Immutable representation of the most recent interaction with
-              //an asynchronous computation.
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<Product> demoProducts = snapshot.data;

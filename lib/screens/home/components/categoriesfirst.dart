@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Categoriesfirst extends StatefulWidget {
   @override
@@ -9,12 +10,12 @@ class Categoriesfirst extends StatefulWidget {
 
 class _CategoriesState extends State<Categoriesfirst> {
   List<String> categories = [
-    "Tất cả",
-    "Quạt",
-    "Nhẫn",
-    "Đèn",
-    "Lọ thủy tinh",
-    "Phụ kiện"
+    "all".tr().toString(),
+    "fan".tr().toString(),
+    "rings".tr().toString(),
+    "lamp".tr().toString(),
+    "glass bottle".tr().toString(),
+    "accessories".tr().toString()
   ];
   // By default first one is selected
   int selectedIndex = 0;

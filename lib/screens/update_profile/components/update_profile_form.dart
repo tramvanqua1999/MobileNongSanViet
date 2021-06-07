@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/models/Customer.dart';
 import 'package:shop_app/models/request.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -76,19 +76,17 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       print(response.body);
       if (response.body == "1") {
         final snackBar = SnackBar(
-          content: Text('Cập nhật không thành công'),
+          content: Text('update successful'.tr().toString()),
           duration: Duration(seconds: 2),
           action: new SnackBarAction(
-            label: 'Success',
-            onPressed: () {
-              // Some code to undo the change!
-            },
+            label: 'success'.tr().toString(),
+            onPressed: () {},
           ),
         );
         Scaffold.of(context).showSnackBar(snackBar);
       } else {
         final snackBar = SnackBar(
-          content: Text('Cập nhật không thành công'),
+          content: Text('update failed'.tr().toString()),
           duration: Duration(seconds: 2),
           action: new SnackBarAction(
             label: 'Success',
@@ -132,7 +130,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                     SizedBox(height: getProportionateScreenHeight(20)),
                     DefaultButton(
                       height: 56,
-                      text: "Cập nhật",
+                      text: "update".tr().toString(),
                       press: () {
                         if (_formKey.currentState.validate()) {
                           saveprofile();
@@ -168,10 +166,9 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Địa chỉ",
+        labelText: "address".tr().toString(),
         // hintText: address,
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
+
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon:
             CustomSurffixIcon(svgIcon: "assets/icons/Location point.svg"),
@@ -197,7 +194,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Họ và tên",
+        labelText: "first and last name".tr().toString(),
         // hintText: name,
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
@@ -231,8 +228,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Xác nhận mật khẩu",
-        hintText: "Nhập lại mật khẩu của bạn",
+        labelText: "confirm password".tr().toString(),
+        hintText: "re-enter your password".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -263,8 +260,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Mật khẩu",
-        hintText: "Nhập mật khẩu của bạn",
+        labelText: "password".tr().toString(),
+        hintText: "enter your password".tr().toString(),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -298,8 +295,6 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       decoration: InputDecoration(
         labelText: "Email",
         // hintText: email,
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),

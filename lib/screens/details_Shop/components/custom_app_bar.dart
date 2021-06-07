@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/models/Popular_product.dart';
 import 'package:shop_app/models/profileShop.dart';
-import 'package:shop_app/screens/details_Shop/components/body.dart';
-import 'package:shop_app/screens/details_Shop/details_screen.dart';
 
 import '../../../size_config.dart';
 

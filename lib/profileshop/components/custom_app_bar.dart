@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/models/Popular_product.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/screens/list_followed/list_follow_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../size_config.dart';
 
@@ -60,7 +61,7 @@ class CustomAppBar extends PreferredSize {
               child: Row(
                 children: [
                   Text(
-                    'Shop',
+                    'shop'.tr().toString(),
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,

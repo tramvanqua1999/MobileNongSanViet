@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/screens/update_profile/components/update_profile_form.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Body extends StatelessWidget {
   Body({
@@ -20,8 +21,8 @@ class Body extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.02),
-                Text("Cập nhật lại thông tin", style: headingStyle),
-                Text("Vui lòng nhập đủ thông tin bên dưới",
+                Text("update information".tr().toString(), style: headingStyle),
+                Text("please enter enough information below".tr().toString(),
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16)),
                 SizedBox(height: SizeConfig.screenHeight * 0.03),

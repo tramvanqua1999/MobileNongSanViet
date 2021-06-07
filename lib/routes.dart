@@ -17,6 +17,9 @@ import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/register/sign_up_screen.dart';
 import 'package:shop_app/screens/list_followed/list_follow_screen.dart';
 import 'package:shop_app/screens/list_favorite/list_favorite_screen.dart';
+import 'package:shop_app/screens/rules/rules_screen.dart';
+import 'package:shop_app/screens/payment/payment_screen.dart';
+import 'package:shop_app/screens/payment/components/existing-cards.dart';
 
 // We use name route
 // All our routes will be available here
@@ -38,5 +41,8 @@ final Map<String, WidgetBuilder> routes = {
   RegisterScreen.routeName: (context) => RegisterScreen(),
   UpdateProfileScreen.routeName: (content) => UpdateProfileScreen(),
   ListFollowScreen.routeName: (content) => ListFollowScreen(),
-  ListFavoriteScreen.routeName: (content) => ListFavoriteScreen()
+  ListFavoriteScreen.routeName: (content) => ListFavoriteScreen(),
+  RulesScreen.routeName: (content) => RulesScreen(),
+  PaymentScreen.routeName: (content) => PaymentScreen(),
+  ExistingCardsPage.routeName: (content) => ExistingCardsPage()
 };

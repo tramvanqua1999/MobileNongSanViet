@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shop_app/models/profileShop.dart';
 import 'package:shop_app/models/request.dart';
 import 'package:shop_app/profileshop/profile_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -24,7 +25,7 @@ class _ListFollowState extends State<ListFollow> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text("Đang theo dõi ", style: headingStyle),
+      Text("followed".tr().toString(), style: headingStyle),
       Padding(
         padding:
             EdgeInsets.symmetric(vertical: getProportionateScreenHeight(10)),
@@ -60,7 +61,8 @@ class _ListFollowState extends State<ListFollow> {
                             child: Row(
                               children: <Widget>[
                                 CircleAvatar(
-                                  backgroundImage: AssetImage(shop[index].img),
+                                  backgroundImage:
+                                      NetworkImage(shop[index].img),
                                   maxRadius: 30,
                                 ),
                                 SizedBox(
@@ -105,15 +107,11 @@ class _ListFollowState extends State<ListFollow> {
                               });
                             },
                             child: Text(
-                              " Bỏ theo dõi",
+                              "unfollow".tr().toString(),
                               style: TextStyle(
                                 color: Colors.red[500],
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
-                                // decoration: TextDecoration.underline,
-                                // fontWeight: widget.isMessageRead
-                                //     ? FontWeight.bold
-                                //     : FontWeight.normal
                               ),
                             ),
                           ),

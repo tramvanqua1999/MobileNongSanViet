@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/Popular_product.dart';
 import 'package:shop_app/models/request.dart';
-import 'package:shop_app/straintion/load_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
@@ -23,7 +23,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
-            title: "Ứng dụng",
+            title: "app".tr().toString(),
             press: () {},
             icon: Icons.arrow_right,
           ),
@@ -43,7 +43,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                       List<Product> demoProducts = snapshot.data;
                       return SpecialOfferCard(
                         image: "assets/images/Image Banner 2.png",
-                        category: "Hiện có",
+                        category: "now available".tr().toString(),
                         numOfBrands: demoProducts.length,
                         press: () {},
                       );
@@ -61,7 +61,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                       List<Product> saleFuture = snapshot.data;
                       return SpecialOfferCard(
                         image: "assets/images/Image Banner 3.png",
-                        category: "Giảm giá",
+                        category: "discount".tr().toString(),
                         numOfBrands: saleFuture.length,
                         press: () {},
                       );
@@ -136,7 +136,8 @@ class SpecialOfferCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands Sản phẩm")
+                        TextSpan(
+                            text: "$numOfBrands " + "product".tr().toString())
                       ],
                     ),
                   ),

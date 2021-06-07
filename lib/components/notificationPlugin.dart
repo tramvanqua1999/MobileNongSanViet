@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'dart:io' show File, Platform;
 import 'package:http/http.dart' as http;
 
@@ -88,7 +89,7 @@ class NotificationPlugin {
     await flutterLocalNotificationsPlugin.show(
       0,
       'OTP',
-      'Mã xác nhận của bạn là: ' + code, //null
+      'your confirmation code is:'.tr().toString() + code, //null
       platformChannelSpecifics,
       payload: 'New Payload',
     );

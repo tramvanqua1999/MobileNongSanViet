@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../size_config.dart';
 
@@ -27,7 +28,7 @@ class Information extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Đánh giá',
+                'evaluate'.tr().toString(),
                 style: TextStyle(
                   color: Colors.black54,
                   fontSize: 15.0,
@@ -53,7 +54,7 @@ class Information extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Tổng sản phẩm',
+                'gross product'.tr().toString(),
                 style: TextStyle(
                   color: Colors.black54,
                   fontSize: 15.0,
@@ -77,7 +78,7 @@ class Information extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Lượt theo dõi',
+                'view'.tr().toString(),
                 style: TextStyle(
                   color: Colors.black54,
                   fontSize: 15.0,

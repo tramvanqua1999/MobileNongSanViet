@@ -18,14 +18,3 @@ class Shop {
 }
 
 // Our demo Products
-
-Shop demoShops = Shop(
-  id: 1,
-  images: [
-    "assets/images/huy.jpg",
-  ],
-  title: "HuyKaisoul™",
-  description:
-      "Wireless Controller for PS4™ gives you what you want in your gaming from over precision control your games to sharing  …",
-  isFollow: true,
-);

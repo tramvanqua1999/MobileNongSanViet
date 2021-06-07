@@ -13,7 +13,7 @@ class Logo extends StatelessWidget {
         height: 140.0,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(logopath),
+            image: NetworkImage(logopath),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80.0),

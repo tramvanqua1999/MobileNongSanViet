@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/socal_card.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'sign_up_form.dart';
 
@@ -18,9 +19,10 @@ class Body extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), //0.04 = 4%
-                Text("Đăng ký tài khoản", style: headingStyle),
+                Text("sign up for an account".tr().toString(),
+                    style: headingStyle),
                 Text(
-                  "Nhâp thông tin chi tiết của bạn và tiếp tục",
+                  "enter your details and continue".tr().toString(),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.12),
@@ -45,7 +47,7 @@ class Body extends StatelessWidget {
                 ),
                 SizedBox(height: getProportionateScreenHeight(20)),
                 Text(
-                  'Tiếp tục và đồng ý với điều khoản của chúng tôi',
+                  'go ahead and agree to our terms'.tr().toString(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.caption,
                 )

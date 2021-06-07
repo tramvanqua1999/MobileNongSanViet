@@ -1,8 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shop_app/components/coustom_bottom_nav_bar.dart';
 import 'package:shop_app/models/Cart.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../enums.dart';
 import 'components/body.dart';
@@ -24,14 +24,21 @@ class _CartScreenState extends State<CartScreen> {
     count = demoCarts.length;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: SvgPicture.asset(
+            "assets/icons/Cart Icon.svg",
+          ),
+          iconSize: 20.0,
+          onPressed: () {},
+        ),
         title: Column(
           children: [
             Text(
-              "Giỏ hàng",
+              "cart".tr().toString(),
               style: TextStyle(color: Colors.black),
             ),
             Text(
-              "${count.toString()} sản phẩm",
+              "${count.toString()} " + "product".tr().toString(),
               style: Theme.of(context).textTheme.caption,
             ),
           ],
