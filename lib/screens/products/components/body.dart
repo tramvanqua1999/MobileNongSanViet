@@ -37,7 +37,7 @@ class _BodyState extends State<Body> {
     "fan".tr().toString(),
     "rings".tr().toString(),
     "earring".tr().toString(),
-    "glass bottle".tr().toString(),
+    "light".tr().toString(),
     "accessories".tr().toString()
   ];
   // By default first one is selected

@@ -34,9 +34,11 @@ class _SignUpFormState extends State<SignUpForm> {
         "phone": phoneController.text,
       });
       print(response.statusCode);
+
       ProcessDialog.closeLoadingDialog();
 
       if (response.statusCode == 201) {
+        print(response.body);
         await notificationPlugin.showNotification(response.body);
         Navigator.pushNamed(
           context,
