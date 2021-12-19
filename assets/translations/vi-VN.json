@@ -60,6 +60,13 @@
     "see More": "Xem thêm",
     "no": "Không",
 
+    "Spice": "Gia vị",
+    "drinks": "đồ uống",
+    "pack": "đóng gói",
+    "vegetable": "rau củ",
+    "meat": "thịt",
+
+
     "all": "Tất cả",
     "fan": "Quạt",
     "rings": "Nhẫn",
@@ -138,10 +145,10 @@
     "delivery charges": "Phí giao hàng",
     "back": "Trở về",
 
-    "welcome to the Handmade Shop": "Chào mừng bạn đến với Handmade Shop",
+    "welcome to the Handmade Shop": "Chào mừng bạn đến với Văn Quá Store",
     "through website interface or mobile application": "qua giao diện website hoặc ứng dụng di động",
     "1rules": "1. Điều chỉnh các sai sót trong việc thực hiện bất kỳ giao dịch nào ảnh hưởng quyền lợi chung",
-    "2rules": "2. Trường hợp HM Shop cho rằng bạn thực hiện hành vi hoặc giao dịch gian lận hoặc đáng ngờ",
+    "2rules": "2. Trường hợp Văn Quá Store cho rằng bạn thực hiện hành vi hoặc giao dịch gian lận hoặc đáng ngờ",
     "3rules": "3. Liên quan đến bất kỳ tổn thất, thiệt hại hoặc các khoản không chính xác nào liên quan đến hệ thống",
     "4rules": "4. Liên quan đến bất kỳ điểm thưởng hay hoàn lại nào làm ảnh hưởng đến quyền lợi người dùng",
     "5rules": "5. Liên quan đến bất kỳ loại phí chưa được thanh toán nào bao gồm cả phí giao hàng",
@@ -157,5 +164,7 @@
     "payment by card": "Thanh toán bằng Card",
     "please wait...": "Vui lòng đợi...",
     "pay via new card": "Thanh toán qua thẻ mới",
-    "pay via existing card": "Thanh toán qua thẻ có sẵn"
+    "pay via existing card": "Thanh toán qua thẻ có sẵn",
+
+    "Bill": "Hóa đơn"
 }

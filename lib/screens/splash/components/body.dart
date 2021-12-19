@@ -17,19 +17,19 @@ class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "text": "welcome to Handmade Shop, Let’s shop!".tr().toString(),
-      "image": "assets/images/shop-clipart.jpg"
+      "text": "welcome to Văn Quá Shop, Let’s shop!" ,
+      "image": "assets/images/1.4.jpg"
     },
     {
-      "text": "we help people conect with store".tr().toString() +
+      "text": "we help people conect with store"  +
           "\n" +
-          "all over Vietnam".tr().toString(),
-      "image": "assets/images/vietnamese-clipart-1.jpg"
+          "all over Vietnam" ,
+      "image": "assets/images/1.3.jpg"
     },
     {
-      "text": "we show the easy way to shop".tr().toString() +
+      "text": "we show the easy way to shop"  +
           "\n" +
-          "just stay at home with us".tr().toString(),
+          "just stay at home with us" ,
       "image": "assets/images/holiday-shopping-clipart-2.png"
     },
   ];

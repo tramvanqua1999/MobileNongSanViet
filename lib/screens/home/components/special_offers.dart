@@ -42,7 +42,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                     if (snapshot.hasData) {
                       List<Product> demoProducts = snapshot.data;
                       return SpecialOfferCard(
-                        image: "assets/images/Image Banner 2.png",
+                        image: "assets/images/2.3.jpg",
                         category: "now available".tr().toString(),
                         numOfBrands: demoProducts.length,
                         press: () {},
@@ -60,7 +60,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                     if (snapshot.hasData) {
                       List<Product> saleFuture = snapshot.data;
                       return SpecialOfferCard(
-                        image: "assets/images/Image Banner 3.png",
+                        image: "assets/images/Image Banner 2.png",
                         category: "discount".tr().toString(),
                         numOfBrands: saleFuture.length,
                         press: () {},

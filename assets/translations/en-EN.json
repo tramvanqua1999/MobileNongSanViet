@@ -60,6 +60,14 @@
     "see More": "See More",
     "no": "No",
 
+    
+    "Spice": "Gia vị",
+    "drinks": "đồ uống",
+    "pack": "đóng gói",
+    "vegetable": "rau củ",
+    "meat": "thịt",
+    
+
     "all": "All",
     "fan": "Fan",
     "rings": "Rings",
@@ -138,10 +146,10 @@
     "delivery charges": "Delivery charges",
     "back": "Back",
 
-    "welcome to the Handmade Shop": "Welcome to the Handmade Shop",
+    "welcome to the Handmade Shop": "Welcome to the Văn Quá Store",
     "through website interface or mobile application": "through website interface or mobile application",
     "1rules": "1. Correct errors in the execution of any transaction that affect common interests",
-    "2rules": "2. Where HM Shop believes you are engaged in a fraudulent or suspicious act or transaction",
+    "2rules": "2. Where Văn Quá Store believes you are engaged in a fraudulent or suspicious act or transaction",
     "3rules": "3. In connection with any loss, damage or inaccuracy related to the system",
     "4rules": "4. In connection with any bonus points or refunds affecting user interests",
     "5rules": "5. In connection with any unpaid fees including shipping charges",
@@ -157,5 +165,7 @@
     "payment by card": "Payment by card",
     "please wait...": "Please wait...",
     "pay via new card": "Pay via new card",
-    "pay via existing card": "Pay via existing card"
+    "pay via existing card": "Pay via existing card",
+
+    "Bill": "Bill"
 }

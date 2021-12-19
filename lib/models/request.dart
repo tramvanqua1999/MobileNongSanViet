@@ -22,7 +22,7 @@ Future<List<Product>> downloadJSONProduct() async {
     return products.map((product) => new Product.fromJson(product)).toList();
   } else {
     // throw Exception('We were not able to successfully download the json data.');
-    sleep(const Duration(seconds: 2));
+    sleep(const Duration(seconds: 10));
     downloadJSONProduct();
   }
 }
@@ -40,7 +40,7 @@ Future<List<Shop>> downloadJSONListFollow() async {
     List products = json.decode(response.body);
     return products.map((product) => new Shop.fromJson(product)).toList();
   } else {
-    sleep(const Duration(seconds: 2));
+    sleep(const Duration(seconds: 4));
     downloadJSONListFollow();
   }
   // throw Exception('We were not able to successfully download the json data.');
@@ -59,7 +59,7 @@ Future<List<Product>> downloadJSONListProductFollow() async {
     List products = json.decode(response.body);
     return products.map((product) => new Product.fromJson(product)).toList();
   } else {
-    sleep(const Duration(seconds: 2));
+    sleep(const Duration(seconds: 4));
     downloadJSONListProductFollow();
   }
   // throw Exception('We were not able to successfully download the json data.');
@@ -74,7 +74,7 @@ Future<List<Product>> downloadJSONHighestDiscount() async {
     List products = json.decode(response.body);
     return products.map((product) => new Product.fromJson(product)).toList();
   } else {
-    sleep(const Duration(seconds: 2));
+    sleep(const Duration(seconds: 4));
     downloadJSONHighestDiscount();
   }
   // throw Exception('We were not able to successfully download the json data.');
@@ -102,7 +102,7 @@ Future<List<Product>> downloadJSONLimited() async {
     List products = json.decode(response.body);
     return products.map((product) => new Product.fromJson(product)).toList();
   } else {
-    sleep(const Duration(seconds: 2));
+    sleep(const Duration(seconds: 4));
     downloadJSONLimited();
   }
   // throw Exception('We were not able to successfully download the json data.');
@@ -120,7 +120,7 @@ Future<List<Product>> downloadProductShopSale(int shopCode) async {
     List productsale = json.decode(response.body);
     return productsale.map((sale) => new Product.fromJson(sale)).toList();
   } else {
-    sleep(const Duration(seconds: 2));
+    sleep(const Duration(seconds: 4));
     downloadProductShopSale(shopCode);
   }
   // throw Exception('We were not able to successfully download the json data.');
@@ -137,7 +137,7 @@ Future<List<Product>> downloadProductShop(int shopCode) async {
     List productsale = json.decode(response.body);
     return productsale.map((sale) => new Product.fromJson(sale)).toList();
   } else {
-    sleep(const Duration(seconds: 2));
+    sleep(const Duration(seconds: 4));
     downloadProductShop(shopCode);
   }
   // throw Exception('We were not able to successfully download the json data.');

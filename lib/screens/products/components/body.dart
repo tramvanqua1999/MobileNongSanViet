@@ -34,11 +34,11 @@ class _BodyState extends State<Body> {
   ];
   List<String> categories = [
     "all".tr().toString(),
-    "fan".tr().toString(),
-    "rings".tr().toString(),
-    "earring".tr().toString(),
-    "light".tr().toString(),
-    "accessories".tr().toString()
+    "Spice".tr().toString(),
+    "drinks".tr().toString(),
+    "pack".tr().toString(),
+    "vegetable".tr().toString(),
+    "meat".tr().toString()
   ];
   // By default first one is selected
   int selectedIndex;

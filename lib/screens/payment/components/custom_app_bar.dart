@@ -28,7 +28,9 @@ class CustomAppBar extends PreferredSize {
                 color: Colors.white,
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  Navigator.pushNamed(context, CartScreen.routeName);
+                  // Navigator.pushNamed(context, CartScreen.routeName);
+                  Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => CartScreen()));
                 },
                 child: SvgPicture.asset(
                   "assets/icons/Back ICon.svg",
